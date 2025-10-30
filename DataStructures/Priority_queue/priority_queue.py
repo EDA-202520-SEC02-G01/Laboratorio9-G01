@@ -10,6 +10,13 @@ def default_compare_lower_value(father_node, child_node):
         return True
     return False
 
+def is_empty(my_heap):
+    return size(my_heap) == 0
+
+
+
+
+
 def new_heap(is_min_pq):
     cmp=default_compare_lower_value()
     if is_min_pq is False:
