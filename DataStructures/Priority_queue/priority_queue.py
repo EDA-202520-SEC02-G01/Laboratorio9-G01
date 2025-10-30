@@ -9,3 +9,9 @@ def default_compare_lower_value(father_node, child_node):
     if pqe.get_priority(father_node) <= pqe.get_priority(child_node):
         return True
     return False
+
+def is_empty(my_heap):
+    return size(my_heap) == 0
+
+
+
