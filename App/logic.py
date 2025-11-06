@@ -49,9 +49,9 @@ def new_logic():
         'routes_pq': None
     }
     
-    analyzer['stops'] = None #TODO completar la creación de la lista
-    analyzer['routes_pq'] = None #TODO completar la creación de la cola de prioridad
-
+    analyzer['stops'] = al.new_list()
+    analyzer['routes_pq'] = pq.new_heap(is_min_pq=True)
+    
     return analyzer
 
 # ___________________________________________________
