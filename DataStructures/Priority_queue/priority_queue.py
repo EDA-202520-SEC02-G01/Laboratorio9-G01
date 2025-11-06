@@ -67,3 +67,19 @@ def contains(my_heap, value):
     return is_present_value(my_heap, value) != -1
 
 
+
+
+def new_heap(is_min_pq):
+    cmp=default_compare_lower_value()
+    if is_min_pq is False:
+        cmp=default_compare_higher_value()
+          
+    queue={
+     'elements': {
+         'elements': [],
+         'size': 1
+     },
+         'size': 0,
+    'cmp_function': cmp
+    }
+    return queue
