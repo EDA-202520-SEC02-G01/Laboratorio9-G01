@@ -101,3 +101,32 @@ def sink(my_heap, pos):
         exchange(my_heap, pos, child)
         pos = child
         
+def get_first_priority(my_heap):
+    if size(my_heap) == 0:
+        return None
+    first_entry = my_heap["elements"][0]
+    return first_entry["value"]
+
+def improve_priority(my_heap, priority, value):
+    pos = is_present_value(my_heap, value)
+    if pos == -1:
+        return my_heap  
+
+    entry = my_heap["elements"][pos]
+    old_priority = entry["priority"]
+
+    if my_heap["cmp_function"](priority, old_priority):
+        entry["priority"] = priority
+        my_heap["elements"][pos] = entry
+
+        swim(my_heap, pos)
+        sink(my_heap, pos)
+
+    return my_heap
+
+def is_present_value(my_heap, value):
+    elements = my_heap["elements"]
+    for i in range(len(elements)):
+        if elements[i]["value"] == value:
+            return i
+    return -1
