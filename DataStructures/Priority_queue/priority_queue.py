@@ -16,7 +16,7 @@ def is_empty(my_heap):
 
 def new_heap(is_min_pq=True):
     heap = {
-        'elements': lt.new_list('ARRAY_LIST'),
+        'elements': lt.new_list(),
         'size': 0,
         'cmp_function': None
     }
@@ -67,19 +67,37 @@ def contains(my_heap, value):
     return is_present_value(my_heap, value) != -1
 
 
+def insert(my_heap, priority, value):
+    entry = pqe.new_pq_entry(priority, value)
+    lt.add_last(my_heap['elements'], entry)
+    my_heap['size'] += 1
+    swim(my_heap, my_heap['size'])
+    return my_heap
 
+def priority(my_heap, parent, child):
+    return my_heap["cmp_function"](parent, child)
 
-def new_heap(is_min_pq):
-    cmp=default_compare_lower_value()
-    if is_min_pq is False:
-        cmp=default_compare_higher_value()
-          
-    queue={
-     'elements': {
-         'elements': [],
-         'size': 1
-     },
-         'size': 0,
-    'cmp_function': cmp
-    }
-    return queue
+def size(my_heap):
+    return my_heap["size"]
+
+def sink(my_heap, pos):
+    elements = my_heap["elements"]
+    n = my_heap["size"]
+    while 2 * pos <= n:
+        child = 2 * pos  
+        if child < n:
+            left = lt.get_element(elements, child)
+            right = lt.get_element(elements, child + 1)
+
+            if not priority(my_heap, left, right):
+                child += 1
+
+        child_node = lt.get_element(elements, child)
+        parent_node = lt.get_element(elements, pos)
+
+        if priority(my_heap, parent_node, child_node):
+            break
+
+        exchange(my_heap, pos, child)
+        pos = child
+        
