@@ -104,8 +104,8 @@ def sink(my_heap, pos):
 def get_first_priority(my_heap):
     if size(my_heap) == 0:
         return None
-    first_entry = my_heap["elements"][0]
-    return first_entry["value"]
+    first_entry = my_heap["elements"]["elements"][1]  
+    return first_entry["priority"]
 
 def improve_priority(my_heap, priority, value):
     pos = is_present_value(my_heap, value)
@@ -125,8 +125,8 @@ def improve_priority(my_heap, priority, value):
     return my_heap
 
 def is_present_value(my_heap, value):
-    elements = my_heap["elements"]
-    for i in range(len(elements)):
+    elements = my_heap["elements"]["elements"]
+    for i in range(1, len(elements)):  
         if elements[i]["value"] == value:
             return i
     return -1
